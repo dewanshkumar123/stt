@@ -1,83 +1,56 @@
-
-import random
-
-NUM_NODES = 0
-NUM_EDGES = 0
-IS_DIRECTED = False
-IS_DAG = False
-IS_WEIGHTED = False
-
-def check_pal(s):
+def is_palindrome(word):
    
-    n = len(s)
-    for i in range(n // 2):
-        if s[i] != s[n - 1 - i]:
+    left, right = 0, len(cleaned_word) - 1
+    while left < right:
+        if cleaned_word[left] != cleaned_word[right]:
             return False
+        left += 1
+        right -= 1
     return True
 
-def get_and_remove_random_edge():
-   
-    idx = random.randint(0, len(possible_edges) - 1)
-    edge = possible_edges[idx]
-    del possible_edges[idx]
-    return edge
-
-def output_test_case(file):
-   
-    file.write(f"{NUM_NODES} {NUM_EDGES}\n")
-    for i in range(NUM_EDGES):
-        file.write(f"{edges[i]['v1']} {edges[i]['v2']}" + 
-                  (f" {edges[i]['w']}" if IS_WEIGHTED else ""))
-        file.write("\n")
-
-def generate_graph(file):
-   
-    global edges, possible_edges, NUM_NODES, NUM_EDGES, IS_DIRECTED, IS_WEIGHTED
-    NUM_NODES = 100
-    NUM_EDGES = 1000
-    start = 1
-    IS_DIRECTED = False
-    IS_WEIGHTED = True
+def factorial(n):
+    if n < 0:
+        raise ValueError("Factorial is not defined")
     
-    if IS_DIRECTED:
-        max_edges = NUM_NODES * (NUM_NODES - 1)
-    else:
-        max_edges = NUM_NODES * (NUM_NODES - 1) // 2
-        
-    if NUM_EDGES > max_edges:
-        NUM_EDGES = max_edges
-        print(f'Maximum number of edges connecting {NUM_NODES} nodes is {NUM_EDGES}!')
-        
-    edges = []
-    possible_edges = []
-    min_weight = 1
-    max_weight = 100
-    
-    for i in range(NUM_NODES):
-        for j in range(i + 1, NUM_NODES):
-            v1 = i + start
-            v2 = j + start
-            w1 = None
-            w2 = None
-            if IS_WEIGHTED:
-                w1 = random.randint(min_weight, max_weight)
-                w2 = random.randint(min_weight, max_weight)
-            possible_edges.append({'v1': v1, 'v2': v2, 'w': w1})
-            if IS_DIRECTED:
-                possible_edges.append({'v1': v2, 'v2': v1, 'w': w2})
-                
-    for i in range(NUM_EDGES):
-        edge = get_and_remove_random_edge()
-        edges.append(edge)
-        
-    output_test_case(file)
+    result = 1
+    for i in range(1, n + 1):
+        result *= i
+    return result
 
-def generate_tree(file):
-   
-    n = 100000
-    file.write(f"{n} {n - 1}\n")
-    for i in range(2, n + 1):
-        a = i
-        b = random.randint(1, i - 1)
-        w = random.randint(1, 100)
-        file.write(f"{a} {b} {w}\n")
+def next_permutation(nums):
+    n = len(nums)
+    i = n - 2
+    while i >= 0 and nums[i] >= nums[i + 1]:
+        i -= 1
+    
+    if i == -1:
+        return False
+    
+    j = n - 1
+    while nums[j] <= nums[i]:
+        j -= 1
+    
+    nums[i], nums[j] = nums[j], nums[i]
+    nums[i + 1:] = reversed(nums[i + 1:])
+    
+    return True
+
+
+word = input()
+if is_palindrome(word):
+  print(f"{word} is a palindrome.")
+else:
+  print(f"{word} is not a palindrome.")
+
+number = int(input())
+try:
+  print(f"Factorial of {number} is {factorial(number)}.")
+except ValueError as e:
+  print(e)
+
+nums = list(map(int, input("Enter a list of numbers for next permutation: ").split()))
+if next_permutation(nums):
+  print(f"The next permutation is: {nums}")
+else:
+  print("No next permutation available.")
+
