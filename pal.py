@@ -65,17 +65,17 @@ def next_permutation(nums):
     return True
 
 if __name__ == "__main__":
-    word = "abccba"
-    if is_palindrome(word):
-        print(f"{word} is a palindrome.")
+    WORD = "abccba"
+    if is_palindrome(WORD):
+        print(f"{WORD} is a palindrome.")
     else:
-        print(f"{word} is not a palindrome.")
+        print(f"{WORD} is not a palindrome.")
 
-    number = int(input("Enter a number to calculate its factorial: "))
-    print(f"Factorial of {number} is {factorial(number)}.")
+    NUM = int(input("Enter a number to calculate its factorial: "))
+    print(f"Factorial of {NUM} is {factorial(NUM)}.")
 
-    nums = list(map(int, input("Enter a list of numbers for next permutation: ").split()))
-    if next_permutation(nums):
-        print(f"The next permutation is: {nums}")
+    NUMS = list(map(int, input("Enter a list of numbers for next permutation: ").split()))
+    if next_permutation(NUMS):
+        print(f"The next permutation is: {NUMS}")
     else:
         print("No next permutation available.")
