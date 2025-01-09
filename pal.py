@@ -6,4 +6,4 @@ def check_pal(s):
 
     return True
 
-print(check_pal("abba"))
+print(check_pal("aabbaa"))
