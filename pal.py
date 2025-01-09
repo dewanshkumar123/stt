@@ -25,14 +25,12 @@ def get_and_remove_random_edge():
     return edge
 
 def output_test_case(file):
-    file.write(f"{NUM_NODES} {NUM_EDGES}")
-    file.write("\n")
-
+    file.write(f"{NUM_NODES} {NUM_EDGES}\n")
     for i in range(NUM_EDGES):
         file.write(f"{edges[i]['v1']} {edges[i]['v2']}" + (f" {edges[i]['w']}" if IS_WEIGHTED else ""))
         file.write("\n")
 
-def generate_graph():
+def generate_graph(file):
     global edges, possible_edges, NUM_NODES, NUM_EDGES, IS_DIRECTED, IS_WEIGHTED
 
     NUM_NODES = 100
